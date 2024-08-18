@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="content">
+    <h2>Register as a Driver for The Ride</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" formControlName="name">
+        <div *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)">
+          <small *ngIf="registerForm.get('name')?.errors?.['required']">Name is required.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number (+234XXXXXXXXXX)</label>
+        <input type="tel" id="phone" formControlName="phone">
+        <div *ngIf="registerForm.get('phone')?.invalid && (registerForm.get('phone')?.dirty || registerForm.get('phone')?.touched)">
+          <small *ngIf="registerForm.get('phone')?.errors?.['required']">Phone number is required.</small>
+          <small *ngIf="registerForm.get('phone')?.errors?.['pattern']">Phone number must be a valid Nigerian number starting with +234.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email">
+        <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
+          <small *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</small>
+          <small *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password">
+        <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)">
+          <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</small>
+          <small *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="license">Driver's License Number</label>
+        <input type="text" id="license" formControlName="license">
+        <div *ngIf="registerForm.get('license')?.invalid && (registerForm.get('license')?.dirty || registerForm.get('license')?.touched)">
+          <small *ngIf="registerForm.get('license')?.errors?.['required']">Driver's license number is required.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="vehicle">Vehicle Make and Model</label>
+        <input type="text" id="vehicle" formControlName="carMake">
+        <div *ngIf="registerForm.get('carMake')?.invalid && (registerForm.get('carMake')?.dirty || registerForm.get('carMake')?.touched)">
+          <small *ngIf="registerForm.get('carMake')?.errors?.['required']">Vehicle make and model are required.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="carColour">Vehicle Colour</label>
+        <input type="text" id="carColour" formControlName="carColour">
+        <div *ngIf="registerForm.get('carColour')?.invalid && (registerForm.get('carColour')?.dirty || registerForm.get('carColour')?.touched)">
+          <small *ngIf="registerForm.get('carColour')?.errors?.['required']">Vehicle make and model are required.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="registration">Vehicle Registration Number</label>
+        <input type="text" id="registration" formControlName="registration">
+        <div *ngIf="registerForm.get('registration')?.invalid && (registerForm.get('registration')?.dirty || registerForm.get('registration')?.touched)">
+          <small *ngIf="registerForm.get('registration')?.errors?.['required']">Vehicle registration number is required.</small>
+        </div>
+      </div>
+      <button type="submit" [disabled]="registerForm.invalid">Register</button>
+    </form>
+  </div>
+</div>

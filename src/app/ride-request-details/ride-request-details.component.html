@@ -1,0 +1,13 @@
+<div class="container" *ngIf="rideRequest">
+  <h2>Ride Request Details</h2>
+  <p><strong>Rider Name:</strong> {{ rideRequest.riderName }}</p>
+  <p><strong>Rider Phone:</strong> {{ rideRequest.riderPhone }}</p>
+  <p><strong>Pickup Location:</strong> {{ rideRequest.pickupLocation }}</p>
+  <p><strong>Destination:</strong> {{ rideRequest.destination }}</p>
+  <p><strong>Estimated Price:</strong> ${{ rideRequest.estimatedPrice }}</p>
+  <p><strong>Additional Notes:</strong> {{ rideRequest.additionalNotes || 'None' }}</p>
+  <div class="buttons">
+    <button (click)="acceptRide()">Accept</button>
+    <button (click)="declineRide()">Decline</button>
+  </div>
+</div>

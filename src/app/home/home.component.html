@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="card">
+    <div *ngIf="currentTrip === undefined && !isRideRequestDeclined">
+      <div class="header">
+        <h3>Hello {{ this.userData.name }} at Location [lon: {{ this.userData.longitude }} - lat: {{ this.userData.latitude }}]</h3>
+        <h1>Welcome to The Ride</h1>
+        <form (ngSubmit)="searchNearbyRides()">
+          <input type="text" [(ngModel)]="destination" name="destination" placeholder="Where are you going?" required>
+          <button type="submit">Find Rides</button>
+        </form>
+      </div>
+      <div class="rides-list" *ngIf="rides.length > 0">
+        <h2>Nearby Rides</h2>
+        <ul>
+          <li *ngFor="let ride of rides">
+            <span>{{ ride.carColor }} {{ ride.name }} {{ ride.carMake }}</span>
+            <span>Plate No: {{ ride.carRegistrationNo }}</span>
+            <span>Lon: {{ ride.longitude }} - Lat: {{ ride.latitude }}</span>
+            <button (click)="requestRide(ride)">Request Ride</button>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="rides.length === 0">
+        <p>No nearby rides available.</p>
+      </div>
+    </div>
+
+    <div *ngIf="currentTrip !== undefined">
+      <h2 *ngIf="isRideOnGoing">
+        Lon: {{ currentTrip?.driverResponse.longitude }}, Lat: {{ currentTrip?.driverResponse.latitude }}
+      </h2>
+    </div>
+
+    <div *ngIf="currentTrip !== undefined && !isRideOnGoing && !isRideRequestDeclined">
+      <h2>You Request has been sent to the Driver and awaiting confirmation</h2>
+
+      <button (click)="cancelRequest()">Cancel Request</button>
+    </div>
+
+    <div *ngIf="isRideRequestDeclined">
+      <h2>The Driver has declined your request</h2>
+
+      <button (click)="isRideRequestDeclined = false">Find another Ride</button>
+    </div>
+
+    <div *ngIf="isRideOnGoing">
+      <h1>You are currently having a ride</h1>
+
+      <h3>name: {{currentTrip.driverResponse.name}}</h3>
+      <h3>phoneNo: {{currentTrip.driverResponse.phoneNo}}</h3>
+      <h3>email: {{currentTrip.driverResponse.email}}</h3>
+      <h3>longitude: {{currentTrip.driverResponse.longitude}}</h3>
+      <h3>latitude: {{currentTrip.driverResponse.latitude}}</h3>
+    </div>
+
+    <div *ngIf="isRideRequestEnded">
+      <h2>The Driver has ended your ride request<br/>Find another Ride for your next destination</h2>
+    </div>
+  </div>
+</div>

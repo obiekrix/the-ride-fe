@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="currentLonLat">
+    <h1>
+      Welcome {{ driverData?.name }}
+    </h1>
+    <h2>
+      You are currently at location:<br/>
+      Lon: {{ driverData?.longitude }}, Lat: {{ driverData?.latitude }}
+    </h2>
+  </div>
+
+
+  <div *ngIf="currentRideData">
+    <h2>Current trip details</h2>
+    <h4>Destination Longitude: {{currentRideData.destinationLongitude}}</h4>
+    <h4>Destination Latitude: {{currentRideData.destinationLatitude}}</h4>
+    <h4>Name: {{currentRideData.riderResponse.name}}</h4>
+    <h4>Phone No: {{currentRideData.riderResponse.phoneNo}}</h4>
+    <h4>Email: {{currentRideData.riderResponse.email}}</h4>
+    <div class="buttons">
+      <button (click)="endRide(currentRideData)">End this trip</button>
+    </div>
+  </div>
+
+  <div *ngIf="!currentRideData">
+    <div class="ride-requests" *ngIf="rideRequests.length > 0">
+      <h2>Nearby Ride Requests</h2>
+      <ul>
+        <li *ngFor="let request of rideRequests">
+          <div>
+            <strong>Passenger Name:</strong> {{ request.riderResponse.name }}<br/>
+            <strong>Phone Number:</strong> {{ request.riderResponse.phoneNo }}<br/>
+            <strong>Pickup Location:</strong> latitude {{ request.pickupLatitude }} - longitude {{ request.pickupLongitude }}<br>
+            <strong>Destination:</strong> latitude {{ request.destinationLongitude }} - longitude {{ request.destinationLongitude }}<br>
+          </div>
+          <div class="buttons">
+            <button (click)="acceptRide(request)">Accept</button>
+            <button (click)="declineRide(request)">Decline</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="rideRequests.length === 0">
+      <p>No new ride requests nearby.</p>
+    </div>
+  </div>
+
+</div>
